@@ -84,7 +84,7 @@ set ruler                   " show the cursor position all the time
 set nostartofline           " Avoid moving cursor to BOL when jumping around
 set virtualedit=block       " Let cursor move past the last char in <C-v> mode
 set scrolloff=3             " Keep 3 context lines above and below the cursor
-set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
+set backspace=4             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
 set nowrap                  " don't wrap text
 set linebreak               " don't wrap textin the middle of a word
@@ -130,10 +130,8 @@ set incsearch               " Incrementally search while typing a /regex
 if has("gui_running")
     colorscheme desert
     " Remove menu bar
-    set guioptions-=m
 
     " Remove toolbar
-    set guioptions-=T
 else
     colorscheme torte
 endif
@@ -162,3 +160,5 @@ let g:acp_completeoptPreview=1
 map <C-space> :bn <CR>
 map <C-S-space> :bp <CR>
 let g:syntastic_cpp_compiler_options = ' -std=c++0x'
+set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
+set errorformat=%f:%l:\ %m
