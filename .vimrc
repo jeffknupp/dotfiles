@@ -1,3 +1,12 @@
+"" ==========================================================
+" Pathogen - Allows us to organize our vim plugins
+" ==========================================================
+" Load pathogen with docs for all plugins
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
+
+
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -34,20 +43,12 @@ nmap <leader>a <Esc>:Ack!
 map <leader>g :GundoToggle<CR>
 
 " ==========================================================
-" Pathogen - Allows us to organize our vim plugins
-" ==========================================================
-" Load pathogen with docs for all plugins
-filetype off
-call pathogen#infect()
-
-" ==========================================================
 " Basic Settings
 " ==========================================================
 syntax on                     " syntax highlighing
 filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
 set number                    " Display line numbers
-set numberwidth=1             " using only 1 column (and 1 space) while possible
 set background=dark           " We are using dark background in vim
 set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
@@ -61,9 +62,6 @@ set vb t_vb=
 set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
-
-set grepprg=ack         " replace the default grep program with ack
-
 
 " Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
@@ -84,9 +82,9 @@ set ruler                   " show the cursor position all the time
 set nostartofline           " Avoid moving cursor to BOL when jumping around
 set virtualedit=block       " Let cursor move past the last char in <C-v> mode
 set scrolloff=3             " Keep 3 context lines above and below the cursor
-set backspace=4             " Allow backspacing over autoindent, EOL, and BOL
+set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
-set nowrap                  " don't wrap text
+set wrap                    " Wrap text
 set linebreak               " don't wrap textin the middle of a word
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
@@ -95,12 +93,10 @@ set shiftwidth=4            " but an indent level is 2 spaces wide.
 set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
-set foldmethod=indent       " allow us to fold on indents
-set foldlevel=99            " don't fold by default
 
 " close preview window automatically when we move around
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 """" Reading/Writing
 set noautowrite             " Never write a file unless I request it.
@@ -151,14 +147,25 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 " Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-let g:acp_enableAtStartup = 1
+" let g:acp_enableAtStartup = 1
 autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
 autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
 
-let g:acp_completeoptPreview=1
+" let g:acp_completeoptPreview=1
 
 map <C-space> :bn <CR>
 map <C-S-space> :bp <CR>
 let g:syntastic_cpp_compiler_options = ' -std=c++0x'
-set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
-set errorformat=%f:%l:\ %m
+" set errorformat=%f:%l:\ %m
+
+" ==========================================================
+" Python-mode settings
+" ==========================================================
+let g:pymode_lint_cheker = "pylint"
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_ignore = ""
+let g:pymode_folding = 0
+let g:pymode_virtualenv = 1
+let g:pymode_rope_always_show_complete_menu = 1
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+let g:pymode_rope_extended_complete=1
