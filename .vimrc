@@ -1,22 +1,23 @@
- set nocompatible               " be iMproved
- filetype off                   " required!
+set nocompatible               " be iMproved
+filetype off                   " required!
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 let g:vundle_default_git_proto='git'
 
- Bundle 'gmarik/vundle'
- Bundle 'tpope/vim-fugitive'
- Bundle 'tomasr/molokai'
- Bundle 'tpope/vim-repeat'
- Bundle 'Shougo/neocomplcache'
- Bundle 'kien/ctrlp.vim'
- Bundle 'klen/python-mode'
- Bundle 'plasticboy/vim-markdown' 
- Bundle 'sjl/gundo.vim'
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tomasr/molokai'
+Bundle 'tpope/vim-repeat'
+Bundle 'Shougo/neocomplcache'
+Bundle 'kien/ctrlp.vim'
+Bundle 'klen/python-mode'
+Bundle 'plasticboy/vim-markdown' 
+Bundle 'sjl/gundo.vim'
+Bundle 'altercation/vim-colors-solarized'
 
- source ~/.vimrc.neocomplcache
- source ~/.vimrc.python-mode
+source ~/.vimrc.neocomplcache
+source ~/.vimrc.python-mode
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -136,7 +137,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 map <C-space> :bn <CR>
 map <C-S-space> :bp <CR>
 
-colorscheme molokai
+colorscheme solarized
+set background=dark
 
 set guifont=Source\ Code\ Pro\ 12
 set noswapfile
