@@ -1,16 +1,25 @@
-"" ==========================================================
-" Pathogen - Allows us to organize our vim plugins
-" ==========================================================
-" Load pathogen with docs for all plugins
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
+ set nocompatible               " be iMproved
+ filetype off                   " required!
 
+ set rtp+=~/.vim/bundle/vundle/
+ call vundle#rc()
+let g:vundle_default_git_proto='git'
 
+ Bundle 'gmarik/vundle'
+ Bundle 'tpope/vim-fugitive'
+ Bundle 'tomasr/molokai'
+ Bundle 'tpope/vim-repeat'
+ Bundle 'Shougo/neocomplcache'
+ Bundle 'kien/ctrlp.vim'
+ Bundle 'klen/python-mode'
+ Bundle 'plasticboy/vim-markdown' 
+ Bundle 'sjl/gundo.vim'
+
+ source ~/.vimrc.neocomplcache
+ source ~/.vimrc.python-mode
 " ==========================================================
 " Shortcuts
 " ==========================================================
-set nocompatible              " Don't be compatible with vi
 let mapleader=","             " change the leader to be a comma vs slash
 
 " sudo write this
@@ -35,9 +44,6 @@ map <c-h> <c-w>h
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
 imap <C-W> <C-O><C-W>
-
-" Ack searching
-nmap <leader>a <Esc>:Ack!
 
 " Load the Gundo window
 map <leader>g :GundoToggle<CR>
@@ -70,12 +76,6 @@ nnoremap <leader>. :lcd %:p:h<CR>
 " first autocmd for the filetype here
 "autocmd FileType * setlocal colorcolumn=0
 
-""" Insert completion
-" don't select first item, follow typing in autocomplete
-set completeopt=menuone,longest,preview
-set pumheight=6             " Keep a small completion window
-
-
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
 set ruler                   " show the cursor position all the time
@@ -93,10 +93,8 @@ set shiftwidth=4            " but an indent level is 2 spaces wide.
 set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
-
-" close preview window automatically when we move around
-" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+set formatoptions=tcroql    " Setting text and comment formatting to auto
+set textwidth=80            " Lines are automatically wrapped after 80 columns
 
 """" Reading/Writing
 set noautowrite             " Never write a file unless I request it.
@@ -108,29 +106,17 @@ set modelines=5             " they must be within the first or last 5 lines.
 """" Messages, Info, Status
 set ls=2                    " allways show status line
 set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
-set confirm                 " Y-N-C prompt if closing with unsaved changes.
 set showcmd                 " Show incomplete normal mode commands as I type.
 set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " Show some info, even without statuslines.
 set laststatus=2            " Always show statusline, even if only 1 window.
-set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
-
-"""" Display
-if has("gui_running")
-    colorscheme desert
-    " Remove menu bar
-
-    " Remove toolbar
-else
-    colorscheme torte
-endif
 
 " Paste from clipboard
 map <leader>p "+p
@@ -147,25 +133,10 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 " Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" let g:acp_enableAtStartup = 1
-autocmd VimEnter * imap <expr> <Tab> pumvisible() ? "<C-N>" : "<Tab>"
-autocmd VimEnter * imap <expr> <S-Tab> pumvisible() ? "<C-P>" : "<S-Tab>"
-
-" let g:acp_completeoptPreview=1
-
 map <C-space> :bn <CR>
 map <C-S-space> :bp <CR>
-let g:syntastic_cpp_compiler_options = ' -std=c++0x'
-" set errorformat=%f:%l:\ %m
 
-" ==========================================================
-" Python-mode settings
-" ==========================================================
-let g:pymode_lint_cheker = "pylint"
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_ignore = ""
-let g:pymode_folding = 0
-let g:pymode_virtualenv = 1
-let g:pymode_rope_always_show_complete_menu = 1
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
-let g:pymode_rope_extended_complete=1
+colorscheme molokai
+
+set guifont=Source\ Code\ Pro\ 12
+set noswapfile
