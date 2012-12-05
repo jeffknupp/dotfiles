@@ -142,3 +142,4 @@ set background=dark
 
 set guifont=Source\ Code\ Pro\ 12
 set noswapfile
+hi DiffText gui=underline guibg=red guifg=black
