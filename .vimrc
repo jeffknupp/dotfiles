@@ -140,5 +140,5 @@ map <C-S-space> :bp <CR>
 colorscheme solarized
 set background=dark
 
-set guifont=Source\ Code\ Pro\ 12
+set guifont=Source\ Code\ Pro\ 10
 set noswapfile
