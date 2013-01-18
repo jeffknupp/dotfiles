@@ -21,6 +21,16 @@ alias l='ls -lrt'
 alias vim='gvim'
 alias mmv='noglob zmv -W'
 setopt extended_glob
-alias lsd='ls -1 -d *(/)' # list only directories
+
+# Don't exit with error when redirecting to existing file
+setopt CLOBBER
+
+# list only directories
+alias lsd='ls -1 -d *(/)' 
+
+# Don't try to glob when running 'svn ...'
+alias svn='noglob svn'
+alias find-exec='noglob find-exec'
+
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward

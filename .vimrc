@@ -18,6 +18,8 @@ Bundle 'altercation/vim-colors-solarized'
 
 source ~/.vimrc.neocomplcache
 source ~/.vimrc.python-mode
+source ~/.vimrc.local
+
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -140,6 +142,5 @@ map <C-S-space> :bp <CR>
 colorscheme solarized
 set background=dark
 
-set guifont=Source\ Code\ Pro\ 10
 set noswapfile
 hi DiffText gui=underline guibg=red guifg=black
