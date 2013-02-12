@@ -9,15 +9,13 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-repeat'
-Bundle 'Shougo/neocomplcache'
 Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
 Bundle 'plasticboy/vim-markdown' 
 Bundle 'sjl/gundo.vim'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
 
-source ~/.vimrc.neocomplcache
-source ~/.vimrc.python-mode
 source ~/.vimrc.local
 
 " ==========================================================

@@ -6,7 +6,7 @@
 #
 
 # Include stuff that needs to be set before sourcing init.zsh
-source .zshrc.pre
+source ~/.zshrc.pre
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -15,7 +15,7 @@ fi
 
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
-source .zshrc.include
+source ~/.zshrc.include
 
 alias l='ls -lrt'
 alias vim='gvim'
