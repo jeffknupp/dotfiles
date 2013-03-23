@@ -16,8 +16,6 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
 
-source ~/.vimrc.local
-
 " ==========================================================
 " Shortcuts
 " ==========================================================
