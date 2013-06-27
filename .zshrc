@@ -18,7 +18,6 @@ fi
 source ~/.zshrc.include
 
 alias l='ls -lrt'
-alias vim='gvim'
 alias mmv='noglob zmv -W'
 setopt extended_glob
 
@@ -34,3 +33,4 @@ alias find-exec='noglob find-exec'
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward
+ssh-add
