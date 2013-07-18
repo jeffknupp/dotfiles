@@ -17,7 +17,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/vcscommand.vim'
 Bundle 'jnwhiteh/vim-golang'
-Bundle 'Gundo'
+Bundle 'wincent/Command-T'
 
 " ==========================================================
 " Shortcuts
@@ -155,7 +155,7 @@ if exists("+undofile")
   set undofile
 endif
 hi DiffText gui=underline guibg=red guifg=black
-set guifont=Source\ Code\ Pro\ 12
+set guifont=Source\ Code\ Pro:h18
 
 " Abbreviations file
 source ~/.vimrc.abbr
