@@ -18,6 +18,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/vcscommand.vim'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'wincent/Command-T'
+Bundle 'derekwyatt/vim-scala'
 
 " ==========================================================
 " Shortcuts
@@ -141,7 +142,12 @@ map <C-M-space> :bp <CR>
 colorscheme solarized
 set background=dark
 
-set noswapfile
+if &ft == "scala"
+    set tabstop=2
+    set shiftwidth=2
+    set softtabstop=2
+endif
+
 if exists("+undofile")
   " undofile - This allows you to use undos after exiting and restarting
   " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
@@ -155,7 +161,7 @@ if exists("+undofile")
   set undofile
 endif
 hi DiffText gui=underline guibg=red guifg=black
-set guifont=Source\ Code\ Pro:h18
+set guifont=Source\ Code\ Pro:h21
 
 " Abbreviations file
 source ~/.vimrc.abbr
