@@ -15,6 +15,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'wincent/Command-T'
 
 " ==========================================================
 " Shortcuts
@@ -133,10 +134,31 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 map <C-space> :bn <CR>
-map <C-S-space> :bp <CR>
+map <C-M-space> :bp <CR>
 
 colorscheme solarized
 set background=dark
 
-set noswapfile
+if &ft == "scala"
+    set tabstop=2
+    set shiftwidth=2
+    set softtabstop=2
+endif
+
+if exists("+undofile")
+  " undofile - This allows you to use undos after exiting and restarting
+  " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+  " :help undo-persistence
+  " This is only present in 7.3+
+  if isdirectory($HOME . '/.vim/undo') == 0
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+  set undodir=./.vim-undo//
+  set undodir+=~/.vim/undo//
+  set undofile
+endif
 hi DiffText gui=underline guibg=red guifg=black
+set guifont=Source\ Code\ Pro:h21
+
+" Abbreviations file
+source ~/.vimrc.abbr
