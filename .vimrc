@@ -161,7 +161,4 @@ if exists("+undofile")
   set undofile
 endif
 hi DiffText gui=underline guibg=red guifg=black
-set guifont=Source\ Code\ Pro:h21
-
-" Abbreviations file
-source ~/.vimrc.abbr
+set guifont=Source\ Code\ Pro:h16
