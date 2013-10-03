@@ -15,10 +15,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/vcscommand.vim'
-Bundle 'jnwhiteh/vim-golang'
 Bundle 'wincent/Command-T'
-Bundle 'derekwyatt/vim-scala'
 
 " ==========================================================
 " Shortcuts
