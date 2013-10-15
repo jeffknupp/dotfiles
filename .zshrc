@@ -30,6 +30,8 @@ alias lsd='ls -1 -d *(/)'
 # Don't try to glob when running 'svn ...'
 alias svn='noglob svn'
 alias find-exec='noglob find-exec'
+alias g='git'
+. ~/tools/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward

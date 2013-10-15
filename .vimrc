@@ -2,6 +2,7 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/tools/powerline/powerline/bindings/vim
 call vundle#rc()
 let g:vundle_default_git_proto='git'
 
@@ -158,4 +159,4 @@ if exists("+undofile")
   set undofile
 endif
 hi DiffText gui=underline guibg=red guifg=black
-set guifont=Source\ Code\ Pro:h16
+set guifont=Sauce\ Code\ Powerline:h16
