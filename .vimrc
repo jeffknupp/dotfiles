@@ -140,6 +140,9 @@ map <C-M-space> :bp <CR>
 colorscheme solarized
 set background=dark
 
+" Automatically add breakpoint for PDB
+nnoremap <leader>P Oimport pdb; pdb.set_trace()
+
 if &ft == "scala"
     set tabstop=2
     set shiftwidth=2
@@ -159,4 +162,4 @@ if exists("+undofile")
   set undofile
 endif
 hi DiffText gui=underline guibg=red guifg=black
-set guifont=Sauce\ Code\ Powerline:h16
+set guifont=Sauce\ Code\ Powerline:h17
