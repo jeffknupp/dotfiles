@@ -98,8 +98,7 @@ set formatoptions=tcroql    " Setting text and comment formatting to auto
 set textwidth=80            " Lines are automatically wrapped after 80 columns
 
 """" Reading/Writing
-set noautowrite             " Never write a file unless I request it.
-set noautowriteall          " NEVER.
+set autowriteall            " Don't bother me about changed buffers
 set noautoread              " Don't automatically re-read changed files.
 set modeline                " Allow vim options to be embedded in files;
 set modelines=5             " they must be within the first or last 5 lines.
@@ -162,4 +161,7 @@ if exists("+undofile")
   set undofile
 endif
 hi DiffText gui=underline guibg=red guifg=black
+
+" Preview Markdown files with QuickLook
+map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
 set guifont=Sauce\ Code\ Powerline:h17
