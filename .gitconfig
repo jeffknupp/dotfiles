@@ -26,6 +26,7 @@
     dh = diff HEAD
     dcheck = diff --check
     c = commit -m 
+    undo = checkout --
 [color]
     ui = true
 [diff]
