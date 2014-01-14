@@ -1,0 +1,41 @@
+[user]
+	name = Jeff Knupp
+	email = jknupp@appnexus.com
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
+[alias]
+	switch = !legit switch \"$@\"
+	branches = !legit branches
+	sprout = !legit sprout \"$@\"
+	unpublish = !legit unpublish \"$@\"
+	harvest = !legit harvest \"$@\"
+	sync = !legit sync \"$@\"
+	publish = !legit publish \"$@\"
+	graft = !legit graft \"$@\"
+    lp = log --patch
+    undo = reset --hard
+    s = status
+    lc = log ORIG_HEAD.. --stat --no-merges
+    gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
+    pushg = push origin HEAD:refs/for/master
+    ca = commit --amend
+    dc = diff --cached
+    d = diff --patch-with-stat -M5 -D
+    dh = diff HEAD
+    dcheck = diff --check
+    c = commit -m 
+    undo = checkout --
+[color]
+    ui = true
+[diff]
+    diff-algorithm = patience
+[core]
+	excludesfile = /Users/jknupp/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
