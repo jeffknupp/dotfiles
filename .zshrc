@@ -6,12 +6,13 @@
 #
 
 # Include stuff that needs to be set before sourcing init.zsh
-source ~/.zshrc.pre
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+source /Users/jknupp/tools/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
@@ -35,4 +36,3 @@ alias g='git'
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward
-ssh-add
