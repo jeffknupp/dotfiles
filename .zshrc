@@ -12,7 +12,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-source /Users/jknupp/tools/powerline/powerline/bindings/zsh/powerline.zsh
+source /home/jknupp/tools/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
