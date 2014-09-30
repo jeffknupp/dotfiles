@@ -1,23 +1,27 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
-
-set rtp+=~/.vim/bundle/vundle/
 set rtp+=~/tools/powerline/powerline/bindings/vim
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 let g:vundle_default_git_proto='git'
+let g:golang_root = '/usr/local/bin'
 
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tomasr/molokai'
-Bundle 'tpope/vim-repeat'
-Bundle 'kien/ctrlp.vim'
-Bundle 'plasticboy/vim-markdown' 
-Bundle 'sjl/gundo.vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'wincent/Command-T'
+Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'tomasr/molokai'
+Plugin 'tpope/vim-repeat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'plasticboy/vim-markdown' 
+Plugin 'sjl/gundo.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'fatih/vim-go'
+Plugin 'wincent/Command-T'
 
+call vundle#end()
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -136,7 +140,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 map <C-space> :bn <CR>
 map <C-M-space> :bp <CR>
 
-colorscheme solarized
+colorscheme Tomorrow-Night-Eighties
 set background=dark
 
 " Automatically add breakpoint for PDB
@@ -162,6 +166,9 @@ if exists("+undofile")
 endif
 hi DiffText gui=underline guibg=red guifg=black
 
+" Set CtrlP to search by filename rather than path
+let g:ctrlp_by_filename = 0
+
 " Preview Markdown files with QuickLook
 map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
-set guifont=Sauce\ Code\ Powerline:h17
+set guifont=Droid\ Sans\ Mono:h14
