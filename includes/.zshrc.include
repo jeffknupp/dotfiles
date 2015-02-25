@@ -1,0 +1,36 @@
+alias pip='pip-2.7'
+export PATH=~/install/bin:/usr/local/bin:$PATH:/Users/jknupp/Downloads/storm/storm-0.8.1/bin:/opt/local/bin:~/install/bin:~/tools/riak-1.3.1/bin:/usr/local/bin:/usr/local/share/npm/bin
+export PATH=/Users/jknupp/tools/scala-2.10.2/bin:$PATH
+export PATH=/usr/local/texlive/2013/bin/x86_64-darwin:$PATH
+export PATH=/Users/jknupp/Downloads/emsdk_portable:/Users/jknupp/Downloads/emsdk_portable/clang/3.2_64bit/bin:/Users/jknupp/Downloads/emsdk_portable/node/0.10.18_64bit/bin:/Users/jknupp/Downloads/emsdk_portable/emscripten/1.7.8:$PATH
+export PREFIX=/Users/jknupp/install
+#export CFLAGS="-I/Users/jknupp/install/include -I/usr/local/opt/readline/include"
+#export CPPFLAGS="-I/Users/jknupp/install/include -I/usr/local/opt/readline/include"
+export LDFLAGS="-L//Users/jknupp/install/lib -L/usr/local/opt/readline/lib"
+export LD_LIBRARY_PATH=/Users/jknupp/install/lib:$LD_LIBRARY_PATH
+export SYLD_LIBRARY_PATH=/Users/jknupp/install/lib:$SYLD_LIBRARY_PATH
+export GOPATH=/Users/jknupp/code/go
+#export CC='gcc'
+#export CXX='g++'
+alias vim=mvim
+alias vi="mvim -v"
+
+export HADOOP_HOME=/Users/jknupp/tools/appdoop/appdoop/hadoop-mr
+#export HIVE_HOME=/usr/local/hive-0.7.1-cdh3u6
+export PYTHONPATH=/Users/jknupp/install/bin
+export VIRTUALENVWRAPPER_PYTHON=/Users/jknupp/install/bin/python2
+source /Users/jknupp/install/bin/virtualenvwrapper.sh
+source /Users/jknupp/code/config_files/git-flow-completion.zsh
+
+alias jump="ssh -A jump.adnxs.net"
+alias dmf_prod="mysql -A -u jknupp -h mysql-dmf-slave.prod.adnxs.net -pLissrose1. -D dmf"
+alias dmf_prod_master="mysql -A -u jknupp -h mysql-dmf-master.prod.adnxs.net -pLissrose1. -D dmf"
+alias dmf_sand="mysql -A -u jknupp -h mysql-master.sand-08.adnxs.net -pLissrose1. -D dmf"
+export JAVA_HOME=/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+
+function pystart {
+    cp /Users/jknupp/code/template/template.python $1 && vim $1
+}
+
+source /Users/jknupp/tools/appdoop/appdoop/env.sh
+source /usr/local/share/zsh/site-functions

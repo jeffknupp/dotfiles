@@ -2,13 +2,18 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 set rtp+=~/tools/powerline/powerline/bindings/vim
 set rtp+=~/.vim/bundle/Vundle.vim
+
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+let g:vundle_default_git_proto='git'
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 let g:vundle_default_git_proto='git'
 let g:golang_root = '/usr/local/bin'
 
 Plugin 'gmarik/vundle'
-Plugin 'tpope/vim-fugitive'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-repeat'
 Plugin 'kien/ctrlp.vim'
@@ -21,8 +26,11 @@ Plugin 'Lokaltog/vim-distinguished'
 Plugin 'fatih/vim-go'
 Plugin 'wincent/Command-T'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-scripts/vcscommand.vim'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'Gundo'
 
-call vundle#end()
+call vundle#end()          
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -103,7 +111,8 @@ set formatoptions=tcroql    " Setting text and comment formatting to auto
 set textwidth=80            " Lines are automatically wrapped after 80 columns
 
 """" Reading/Writing
-set autowriteall            " Don't bother me about changed buffers
+set autowrite               " Stop complaining about unsaved buffers
+set autowriteall            " 
 set noautoread              " Don't automatically re-read changed files.
 set modeline                " Allow vim options to be embedded in files;
 set modelines=5             " they must be within the first or last 5 lines.
@@ -144,15 +153,7 @@ map <C-M-space> :bp <CR>
 colorscheme solarized
 set background=dark
 
-" Automatically add breakpoint for PDB
-nnoremap <leader>P Oimport pdb; pdb.set_trace()
-
-if &ft == "scala"
-    set tabstop=2
-    set shiftwidth=2
-    set softtabstop=2
-endif
-
+set noswapfile
 if exists("+undofile")
   " undofile - This allows you to use undos after exiting and restarting
   " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
@@ -172,4 +173,4 @@ let g:ctrlp_by_filename = 0
 
 " Preview Markdown files with QuickLook
 map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
-set guifont=Droid\ Sans\ Mono:h14
+set guifont=Monaco:h14

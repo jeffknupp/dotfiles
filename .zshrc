@@ -52,9 +52,5 @@ alias y-search='yum search $1'
 alias g='git'
 alias reload='source ~/.zshrc'
 
-
-# . ~/tools/powerline/powerline/bindings/zsh/powerline.zsh
-
-
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward
