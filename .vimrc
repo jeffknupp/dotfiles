@@ -20,6 +20,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'fatih/vim-go'
 Plugin 'wincent/Command-T'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 " ==========================================================
@@ -140,7 +141,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 map <C-space> :bn <CR>
 map <C-M-space> :bp <CR>
 
-colorscheme Tomorrow-Night-Eighties
+colorscheme solarized
 set background=dark
 
 " Automatically add breakpoint for PDB
