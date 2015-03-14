@@ -1,11 +1,15 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
+set rtp+=~/tools/powerline/powerline/bindings/vim
+set rtp+=~/.vim/bundle/Vundle.vim
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 let g:vundle_default_git_proto='git'
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
+let g:vundle_default_git_proto='git'
+let g:golang_root = '/usr/local/bin'
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -18,6 +22,10 @@ Plugin 'sjl/gundo.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'fatih/vim-go'
+Plugin 'wincent/Command-T'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/vcscommand.vim'
 Plugin 'fatih/vim-go'
 Plugin 'Gundo'
@@ -169,5 +177,9 @@ hi DiffText gui=underline guibg=red guifg=black
 let g:syntastic_aggregate_errors = 1
 
 
-" Set font when running gvim
-set guifont=Droid\ Sans\ Mono:h14
+" Set CtrlP to search by filename rather than path
+let g:ctrlp_by_filename = 0
+
+" Preview Markdown files with QuickLook
+map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
+set guifont=Monaco:h14
