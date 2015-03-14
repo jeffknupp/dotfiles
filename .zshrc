@@ -12,7 +12,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-source /home/jknupp/tools/powerline/powerline/bindings/zsh/powerline.zsh
+# Pure theme
+autoload -U promptinit && promptinit
+prompt pure
 
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
@@ -32,6 +34,8 @@ alias lsd='ls -1 -d *(/)'
 alias svn='noglob svn'
 alias find-exec='noglob find-exec'
 alias g='git'
+
+#source /Users/jknupp/tools/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward

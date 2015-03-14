@@ -7,7 +7,7 @@ let g:vundle_default_git_proto='git'
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tomasr/molokai'
@@ -19,8 +19,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-scripts/vcscommand.vim'
-Plugin 'jnwhiteh/vim-golang'
+Plugin 'fatih/vim-go'
 Plugin 'Gundo'
+Plugin 'reedes/vim-wordy'
+Plugin 'wting/rust.vim'
 
 call vundle#end()          
 " ==========================================================
@@ -61,7 +63,6 @@ syntax on                     " syntax highlighing
 filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
 set number                    " Display line numbers
-set background=dark           " We are using dark background in vim
 set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=full             " <Tab> cycles between all matching choices.
@@ -101,6 +102,7 @@ set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set formatoptions=tcroql    " Setting text and comment formatting to auto
 set textwidth=80            " Lines are automatically wrapped after 80 columns
+set linespace=3             " The spacing between lines is a little roomier
 
 """" Reading/Writing
 set autowrite               " Stop complaining about unsaved buffers
@@ -108,6 +110,7 @@ set autowriteall            "
 set noautoread              " Don't automatically re-read changed files.
 set modeline                " Allow vim options to be embedded in files;
 set modelines=5             " they must be within the first or last 5 lines.
+set nofoldenable            " disable folding
 
 """" Messages, Info, Status
 set ls=2                    " allways show status line
@@ -142,8 +145,8 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 map <C-space> :bn <CR>
 map <C-M-space> :bp <CR>
 
-colorscheme solarized
 set background=dark
+colorscheme solarized
 
 set noswapfile
 if exists("+undofile")
@@ -158,5 +161,13 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
+
+" Make diffs *really* obvious
 hi DiffText gui=underline guibg=red guifg=black
-set guifont=Monaco:h14
+
+" syntastic: show errors from all linters at once
+let g:syntastic_aggregate_errors = 1
+
+
+" Set font when running gvim
+set guifont=Droid\ Sans\ Mono:h14
