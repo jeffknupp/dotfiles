@@ -23,6 +23,12 @@ prompt pure
 source ~/code/github_code/config_files/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle prezto
+antigen bundle command-not-found
+antigen bundle kennethreitz/autoenv
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle sindresorhus/pure
+antigen bundle rupa/z
 
 antigen apply
 
