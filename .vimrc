@@ -17,7 +17,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-repeat'
 Plugin 'kien/ctrlp.vim'
-Plugin 'plasticboy/vim-markdown' 
 Plugin 'sjl/gundo.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
@@ -108,7 +107,7 @@ set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set formatoptions=tcroql    " Setting text and comment formatting to auto
-set textwidth=80            " Lines are automatically wrapped after 80 columns
+set textwidth=120            " Lines are automatically wrapped after 120 columns
 set linespace=3             " The spacing between lines is a little roomier
 
 """" Reading/Writing
@@ -181,4 +180,4 @@ let g:ctrlp_by_filename = 0
 
 " Preview Markdown files with QuickLook
 map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
-set guifont=Monaco:h14
+set guifont=Monaco:h12

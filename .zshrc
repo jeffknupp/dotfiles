@@ -14,20 +14,18 @@ fi
 
 # Pure theme
 autoload -U promptinit && promptinit
-prompt pure
+prompt sorin
 
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
 
 # antigen package management
-source ~/code/github_code/config_files/antigen/antigen.zsh
+source ~/config_files/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle prezto
 antigen bundle command-not-found
 antigen bundle kennethreitz/autoenv
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle sindresorhus/pure
 antigen bundle rupa/z
 
 antigen apply
