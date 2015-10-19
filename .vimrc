@@ -2,8 +2,6 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 set rtp+=~/tools/powerline/powerline/bindings/vim
 set rtp+=~/.vim/bundle/Vundle.vim
-
-set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 let g:vundle_default_git_proto='git'
 let g:ycm_server_keep_logfiles = 1
@@ -17,20 +15,21 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-repeat'
 Plugin 'kien/ctrlp.vim'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'sjl/gundo.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'wincent/Command-T'
-Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/vcscommand.vim'
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 Plugin 'Gundo'
 Plugin 'reedes/vim-wordy'
-Plugin 'wting/rust.vim'
+"Plugin 'wting/rust.vim'
 
-call vundle#end()          
+call vundle#end()
 " ==========================================================
 " Shortcuts
 " ==========================================================
@@ -46,10 +45,7 @@ map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimr
 nmap <leader>c :copen<CR>
 nmap <leader>cc :cclose<CR>
 
-" for when we forget to use sudo to open/edit a file
-cmap w!! w !sudo tee % >/dev/null
-
-" ctrl-jklm  changes to that split
+" ctrl-jklm to navigate between split buffers
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
@@ -82,12 +78,8 @@ set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
 set wildignore+=*.egg-info/**
 
-" Set working directory
+" Set working directory to directory of file being edited
 nnoremap <leader>. :lcd %:p:h<CR>
-
-" Disable the colorcolumn when switching modes.  Make sure this is the
-" first autocmd for the filetype here
-"autocmd FileType * setlocal colorcolumn=0
 
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
@@ -101,8 +93,8 @@ set wrap                    " Wrap text
 set linebreak               " don't wrap textin the middle of a word
 set autoindent              " always set autoindenting on
 set smartindent             " use smart indent if there is no indent file
-set tabstop=4               " <tab> inserts 4 spaces 
-set shiftwidth=4            " but an indent level is 2 spaces wide.
+set tabstop=4               " <tab> inserts 4 spaces
+set shiftwidth=4            " an indent level is 4 spaces wide.
 set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
@@ -112,11 +104,11 @@ set linespace=3             " The spacing between lines is a little roomier
 
 """" Reading/Writing
 set autowrite               " Stop complaining about unsaved buffers
-set autowriteall            " 
+set autowriteall            " I'm serious...
 set noautoread              " Don't automatically re-read changed files.
 set modeline                " Allow vim options to be embedded in files;
 set modelines=5             " they must be within the first or last 5 lines.
-set nofoldenable            " disable folding
+set nofoldenable            " Disable folding, because recently `zO` has been the command I use most frequently
 
 """" Messages, Info, Status
 set ls=2                    " allways show status line
@@ -133,13 +125,13 @@ set smartcase               " unless uppercase letters are used in the regex.
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
-" Paste from clipboard
+" Paste from system clipboard
 map <leader>p "+p
 
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
 
-" hide matches on <leader>space
+" hide matches on <leader>space (rather than searching for something like " 'asdf')
 nnoremap <leader><space> :nohlsearch<cr>
 
 " Remove trailing whitespace on <leader>S
@@ -148,13 +140,18 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 " Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" Cycle through open buffers with Control + Spacebar
 map <C-space> :bn <CR>
 map <C-M-space> :bp <CR>
 
+" I bet 90% of vim users have the following two lines in their .vimrc...
 set background=dark
 colorscheme solarized
 
+" Don't create swapfiles
 set noswapfile
+
+" Allow for undo even after closing and re-opening a file
 if exists("+undofile")
   " undofile - This allows you to use undos after exiting and restarting
   " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
@@ -180,4 +177,6 @@ let g:ctrlp_by_filename = 0
 
 " Preview Markdown files with QuickLook
 map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
-set guifont=Monaco:h12
+set guifont=Sauce\ Code\ Powerline\ Semibold:h12
+
+set expandtab               " Use spaces, not tabs, for autoindent/tab key.
