@@ -60,6 +60,10 @@ alias y-search='yum search $1'
 alias g='git'
 alias reload='source ~/.zshrc'
 
+alias meh="echo '¯\_(ツ)_/¯' | tee >(pbcopy)"
+alias flipout="echo '(╯°□°）╯︵ ┻━┻' | tee >(pbcopy)"
+alias outflip="echo '┬──┬◡ﾉ(° -°ﾉ)' | tee >(pbcopy)"
+
 #source /Users/jknupp/tools/powerline/powerline/bindings/zsh/powerline.zsh
 
 # Ctrl-R for incremental search in both vi modes
