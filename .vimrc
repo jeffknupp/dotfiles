@@ -24,9 +24,10 @@ Plugin 'Lokaltog/vim-distinguished'
 Plugin 'wincent/Command-T'
 "Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/vcscommand.vim'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 Plugin 'Gundo'
 Plugin 'reedes/vim-wordy'
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 "Plugin 'wting/rust.vim'
 
 call vundle#end()
@@ -170,13 +171,21 @@ hi DiffText gui=underline guibg=red guifg=black
 
 " syntastic: show errors from all linters at once
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_go_checkers = ['go', 'golint']
 
+let g:syntastic_enable_signs = 1
+let g:syntastic_enable_balloons = 1
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
 
 " Set CtrlP to search by filename rather than path
 let g:ctrlp_by_filename = 0
-
 " Preview Markdown files with QuickLook
 map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
-set guifont=Sauce\ Code\ Powerline\ Semibold:h12
-
+set guifont=Sauce\ Code\ Powerline:h14
+"autocmd FileType go autocmd BufWritePre <buffer> GoFmt
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.

@@ -7,6 +7,8 @@
 
 # Include stuff that needs to be set before sourcing init.zsh
 module_path=($module_path /usr/local/lib/zpython)
+fpath+=("/usr/local/share/zsh/site-functions")
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -14,13 +16,11 @@ fi
 
 # Pure theme
 autoload -U promptinit && promptinit
-prompt sorin
-
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
 
 # antigen package management
-source ~/config_files/antigen/antigen.zsh
+source ~/dotfiles/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle jeffknupp/prezto
@@ -64,3 +64,5 @@ alias reload='source ~/.zshrc'
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
