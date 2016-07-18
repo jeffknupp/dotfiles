@@ -6,6 +6,7 @@
 #
 
 # Include stuff that needs to be set before sourcing init.zsh
+fpath=($fpath /usr/local/share/zsh/site-functions)
 module_path=($module_path /usr/local/lib/zpython)
 fpath+=("/usr/local/share/zsh/site-functions")
 
@@ -23,6 +24,9 @@ autoload -U promptinit && promptinit
 source ~/dotfiles/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle psprint/zsh-navigation-tools
 antigen bundle jeffknupp/prezto
 antigen bundle command-not-found
 antigen bundle kennethreitz/autoenv
@@ -70,3 +74,6 @@ alias outflip="echo '┬──┬◡ﾉ(° -°ﾉ)' | tee >(pbcopy)"
 bindkey "^R" history-incremental-search-backward
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/help
