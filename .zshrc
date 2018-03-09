@@ -29,7 +29,6 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle psprint/zsh-navigation-tools
 antigen bundle jeffknupp/prezto
 antigen bundle command-not-found
-antigen bundle kennethreitz/autoenv
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle rupa/z
 
@@ -72,8 +71,6 @@ alias outflip="echo '┬──┬◡ﾉ(° -°ﾉ)' | tee >(pbcopy)"
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward
+bindkey '^ ' autosuggest-accept
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-unalias run-help
-autoload run-help
-HELPDIR=/usr/local/share/zsh/help
