@@ -15,10 +15,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Pure theme
 autoload -U promptinit && promptinit
-# Include machine specific options (i.e. one for work, one for home, one for VPS
-# hosts, etc.)
 
 # antigen package management
 source ~/dotfiles/antigen/antigen.zsh
@@ -36,6 +33,8 @@ antigen apply
 antigen use prezto
 
 source ~/.zshrc.include
+
+prompt sorin
 
 alias l='ls -lrt'
 alias mmv='noglob zmv -W'
@@ -74,3 +73,4 @@ bindkey "^R" history-incremental-search-backward
 bindkey '^ ' autosuggest-accept
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+PATH=/usr/local/terraform_0.9.2:/usr/local/terraform_0.9.2:/Applications/Postgres.app/Contents/Versions/latest/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin:/usr/local/sbin
