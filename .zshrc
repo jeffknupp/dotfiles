@@ -15,10 +15,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Pure theme
 autoload -U promptinit && promptinit
-# Include machine specific options (i.e. one for work, one for home, one for VPS
-# hosts, etc.)
 
 autoload -Uz compinit && compinit
 # antigen package management
@@ -30,7 +27,6 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle psprint/zsh-navigation-tools
 antigen bundle jeffknupp/prezto
 antigen bundle command-not-found
-#antigen bundle kennethreitz/autoenv
 #antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle rupa/z
 antigen bundle zsh-users/zsh-autosuggestions
@@ -39,6 +35,8 @@ antigen apply
 antigen use prezto
 
 source ~/.zshrc.include
+
+prompt sorin
 
 alias l='ls -lrt'
 alias mmv='noglob zmv -W'
@@ -74,8 +72,7 @@ alias outflip="echo '┬──┬◡ﾉ(° -°ﾉ)' | tee >(pbcopy)"
 
 # Ctrl-R for incremental search in both vi modes
 bindkey "^R" history-incremental-search-backward
+bindkey '^ ' autosuggest-accept
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-unalias run-help
-autoload run-help
-HELPDIR=/usr/local/share/zsh/help
+PATH=/usr/local/terraform_0.9.2:/usr/local/terraform_0.9.2:/Applications/Postgres.app/Contents/Versions/latest/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin:/usr/local/sbin
