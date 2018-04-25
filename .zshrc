@@ -20,18 +20,20 @@ autoload -U promptinit && promptinit
 # Include machine specific options (i.e. one for work, one for home, one for VPS
 # hosts, etc.)
 
+autoload -Uz compinit && compinit
 # antigen package management
 source ~/dotfiles/antigen/antigen.zsh
+#source ~/code/github_code/dotfiles/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle psprint/zsh-navigation-tools
 antigen bundle jeffknupp/prezto
 antigen bundle command-not-found
-antigen bundle kennethreitz/autoenv
-antigen bundle zsh-users/zsh-history-substring-search
+#antigen bundle kennethreitz/autoenv
+#antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle rupa/z
+antigen bundle zsh-users/zsh-autosuggestions
 
 antigen apply
 antigen use prezto

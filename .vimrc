@@ -1,8 +1,18 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
+if has('python3')
+    command! -nargs=1 Py py3 <args>
+    set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.6/Python
+    set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.6
+else
+    command! -nargs=1 Py py <args>
+    set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
+    set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
+endif
 set rtp+=~/tools/powerline/powerline/bindings/vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+"let $PYTHONHOME="/Library/Frameworks/Python.framework/Versions/3.6"
 let g:vundle_default_git_proto='git'
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
@@ -20,6 +30,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'nanotech/jellybeans.vim'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'wincent/Command-T'
 "Plugin 'editorconfig/editorconfig-vim'
@@ -100,7 +111,7 @@ set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set formatoptions=tcroql    " Setting text and comment formatting to auto
-set textwidth=120            " Lines are automatically wrapped after 120 columns
+"set textwidth=120            " Lines are automatically wrapped after 120 columns
 set linespace=3             " The spacing between lines is a little roomier
 
 """" Reading/Writing
@@ -147,7 +158,7 @@ map <C-M-space> :bp <CR>
 
 " I bet 90% of vim users have the following two lines in their .vimrc...
 set background=dark
-colorscheme solarized
+colorscheme jellybeans
 
 " Don't create swapfiles
 set noswapfile
@@ -186,6 +197,6 @@ let g:syntastic_warning_symbol = "⚠"
 let g:ctrlp_by_filename = 0
 " Preview Markdown files with QuickLook
 map <Leader>v :write<cr>:sil !/usr/bin/qlmanage -p % > /dev/null &<cr>:redraw!<cr>
-set guifont=Sauce\ Code\ Powerline:h14
+set guifont=Source\ Code\ Pro:h14
 "autocmd FileType go autocmd BufWritePre <buffer> GoFmt
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
