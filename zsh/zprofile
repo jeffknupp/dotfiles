@@ -1,0 +1,22 @@
+#
+# ~/.zprofile -> dotfiles/zsh/zprofile
+#
+# Login shells only, before zshrc. PATH lives here and in zshrc (brew shellenv
+# is idempotent, and `typeset -U path` dedupes), so non-login interactive
+# shells still get a correct PATH.
+#
+
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# python.org framework build. APPENDED, not prepended: Homebrew's python3 and
+# uv-managed interpreters win. This is only here so console scripts that were
+# pip-installed into that framework stay reachable. Delete the two lines once
+# you have confirmed nothing you use lives in there:
+#   ls /Library/Frameworks/Python.framework/Versions/3.13/bin
+_pyframework=/Library/Frameworks/Python.framework/Versions/3.13/bin
+[[ -d $_pyframework ]] && path+=($_pyframework)
+unset _pyframework

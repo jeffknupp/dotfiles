@@ -1,0 +1,4 @@
+.DS_Store
+zsh/zshrc.include.txt
+vim/lsp-health.txt
+vim/checkhealth.txt

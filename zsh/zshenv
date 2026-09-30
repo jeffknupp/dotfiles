@@ -1,0 +1,30 @@
+#
+# ~/.zshenv -> dotfiles/zsh/zshenv
+#
+# Sourced by EVERY zsh: interactive shells, scripts, `ssh host cmd`, editors
+# shelling out. Keep it small and side-effect free. Anything that only matters
+# when a human is typing belongs in zshrc.
+#
+# (This replaces the old symlink into ~/.zprezto/runcoms/zshenv.)
+#
+
+# Locale -----------------------------------------------------------------
+export LANG=${LANG:-en_US.UTF-8}
+
+# Editor / pager ---------------------------------------------------------
+# Set here rather than in zshrc so non-interactive tools (git, fc, sudoedit,
+# `uv run`, cron) inherit the same choice.
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+
+# Rust toolchain (adds ~/.cargo/bin). Guarded; prezto's zshenv used to do this.
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+# macOS ---------------------------------------------------------------------
+# /etc/zshrc runs a global compinit. zim's `completion` module runs its own,
+# with caching, so skip the system one instead of paying for it twice.
+skip_global_compinit=1
+
+export BROWSER=open
+export GOPATH="$HOME/code/go"

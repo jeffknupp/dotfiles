@@ -1,0 +1,216 @@
+#
+# ~/.zshrc -> dotfiles/zsh/zshrc — interactive shell configuration
+#
+# Load order:
+#   1. PATH / fpath        (before anything that looks for binaries or completions)
+#   2. zimfw init          (runs compinit for you, loads every plugin)
+#   3. keybindings, tools  (after the widgets they reference exist)
+#   4. aliases
+#   5. history             (last, so nothing sourced above can clobber it)
+#
+# Environment that non-interactive shells also need lives in zshenv.
+# Login-only PATH setup lives in zprofile.
+#
+
+# ---------------------------------------------------------------------------
+# 1. PATH / fpath
+# ---------------------------------------------------------------------------
+
+# Idempotent, and needed for non-login interactive shells (zprofile is skipped
+# for those). Sets PATH, MANPATH, INFOPATH and FPATH correctly — don't hardcode.
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# `path` is the array tied to $PATH; -U keeps every entry unique.
+typeset -U path PATH fpath FPATH
+
+path=(
+  "$HOME/.local/bin"
+  "$HOME/bin"
+  "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+  "$HOME/.cargo/bin"
+  "$HOME/.bun/bin"
+  $path
+  /Applications/Postgres.app/Contents/Versions/latest/bin
+)
+
+export GOPATH="$HOME/code/go"
+path=("$GOPATH/bin" $path)
+
+# Drop entries that don't exist so lookups stay cheap.
+path=(${^path}(N-/))
+
+# uv / pipx shims
+[[ -r "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
+
+# Everything that ships completions MUST be on fpath before compinit, which
+# zimfw's `completion` module runs during init.zsh below.
+fpath=(
+  "$HOME/.zfunc"
+  "$HOME/.docker/completions"
+  "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
+  $fpath
+)
+fpath=(${^fpath}(N-/))
+
+# ---------------------------------------------------------------------------
+# 2. zimfw
+# ---------------------------------------------------------------------------
+
+ZIM_CONFIG_FILE=~/.config/zsh/zimrc
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+
+# Bootstrap zimfw if it's missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules / rebuild init.zsh when zimrc is newer.
+#
+# The `touch` matters: when the rebuilt init.zsh is byte-identical to the old
+# one, zimfw leaves the file (and its mtime) alone, so this test stays true and
+# `zimfw init` runs again on EVERY new shell. Touching it settles the loop.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init
+  [[ -e ${ZIM_HOME}/init.zsh ]] && touch ${ZIM_HOME}/init.zsh
+fi
+
+# Recommended by zsh-autosuggestions when using a static plugin manager.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+source ${ZIM_HOME}/init.zsh
+
+# NOTE: no `autoload -Uz compinit; compinit` anywhere in this file.
+# zimfw's `completion` module already did it, with caching. Calling compinit
+# again (the old ~/.zfunc line, and the block Docker Desktop appended) cost
+# ~200-400ms per shell and threw away zim's cache.
+
+# ---------------------------------------------------------------------------
+# 3. Completion styles, keybindings, tool hooks
+# ---------------------------------------------------------------------------
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
+setopt EXTENDED_GLOB
+setopt CLOBBER            # zim's `environment` module sets NO_CLOBBER; undo it
+setopt INTERACTIVE_COMMENTS
+setopt NO_BEEP
+
+# Accept the autosuggestion with Ctrl-Space.
+bindkey '^ ' autosuggest-accept
+
+# Up/Down are bound to history-substring-search by zim's `input` module.
+#
+# Ctrl-R: fzf's fuzzy history widget. If you ever see `bck-i-search` again,
+# fzf is not on PATH and this fell through to the last branch — `brew install fzf`.
+if (( $+commands[fzf] )) && fzf --zsh >/dev/null 2>&1; then
+  source <(fzf --zsh)              # fzf >= 0.48
+elif [[ -r ~/.fzf.zsh ]]; then
+  source ~/.fzf.zsh                # older fzf install script
+else
+  bindkey '^R' history-incremental-search-backward
+fi
+
+# fzf defaults. macOS/Homebrew names are `fd` and `bat` — the Debian packages
+# rename them to fdfind/batcat, so a config written for a Debian VPS will
+# silently do nothing here.
+if (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+fi
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --info=inline'
+(( $+commands[bat] )) && \
+  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+
+# less: -X is deliberately absent (it breaks iTerm scrollback).
+export LESS='-F -g -i -M -R -w -z-4'
+(( $+commands[bat] )) && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Tool hooks
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+
+# ---------------------------------------------------------------------------
+# 4. Aliases and functions
+# ---------------------------------------------------------------------------
+
+alias l='ls -ls created'
+alias lsd='ls -1 -d *(/)'
+alias mmv='noglob zmv -W'
+alias find-exec='noglob find-exec'
+alias g='git'
+alias reload='exec zsh'   # `source ~/.zshrc` double-loads plugins; exec is clean
+alias path='print -l $path'
+
+alias meh="echo '¯\_(ツ)_/¯' | tee >(pbcopy)"
+alias flipout="echo '(╯°□°）╯︵ ┻━┻' | tee >(pbcopy)"
+alias outflip="echo '┬──┬◡ﾉ(° -°ﾉ)' | tee >(pbcopy)"
+
+# Modern replacements — aliased only if actually installed.
+(( $+commands[eza] ))  && {
+  alias ls='eza --group-directories-first'
+  alias ll='eza -lh  --group-directories-first --git'
+  alias la='eza -lha --group-directories-first --git'
+  alias lt='eza --tree --level=2 --group-directories-first'
+}
+(( $+commands[bat] ))  && alias cat='bat --paging=never'
+(( $+commands[btop] )) && alias top='btop'
+
+# fzf-powered helpers, defined only when fzf is present.
+if (( $+commands[fzf] )); then
+  # Kill a process picked interactively.
+  fkill() {
+    local pid
+    pid=$(ps -ef | sed 1d | fzf -m --header='select process(es) to kill' | awk '{print $2}')
+    [[ -n "$pid" ]] && echo "$pid" | xargs kill -"${1:-9}"
+  }
+  # Check out a git branch picked interactively.
+  fbr() {
+    local branch
+    branch=$(git branch --all --sort=-committerdate | grep -v HEAD | fzf) || return
+    git checkout "${${branch##* }#remotes/origin/}"
+  }
+fi
+
+mkcd() { mkdir -p "$1" && cd "$1"; }
+
+# Personal include, if you keep one.
+[[ -r ~/.zshrc.include ]] && source ~/.zshrc.include
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# ---------------------------------------------------------------------------
+# 5. History — LAST, so nothing sourced above can override it.
+# ---------------------------------------------------------------------------
+
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=200000          # events kept in memory
+SAVEHIST=200000          # events written to $HISTFILE — if this is 0, nothing saves
+
+setopt SHARE_HISTORY          # share history between running shells: every prompt
+                              # appends new entries and imports what other shells
+                              # have written since
+setopt INC_APPEND_HISTORY     # implied by SHARE_HISTORY; explicit for clarity
+setopt EXTENDED_HISTORY       # store timestamp + duration per entry
+setopt HIST_FCNTL_LOCK        # fcntl locking — safe with many concurrent shells
+setopt HIST_IGNORE_DUPS       # drop an entry identical to the one before it
+setopt HIST_IGNORE_SPACE      # ' command' is not recorded
+setopt HIST_REDUCE_BLANKS     # tidy whitespace before saving
+setopt HIST_FIND_NO_DUPS      # don't show dupes while searching
+setopt HIST_SAVE_NO_DUPS      # don't write dupes to the file
+setopt HIST_VERIFY            # !! expands onto the line instead of running
+setopt HIST_EXPIRE_DUPS_FIRST # trim dupes first when HISTSIZE is hit
+
+# If you'd rather NOT have other shells' commands interleave into your up-arrow
+# order — new shells still see everything, each shell keeps its own order:
+#   unsetopt SHARE_HISTORY
+#   setopt INC_APPEND_HISTORY_TIME
