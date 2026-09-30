@@ -1,0 +1,75 @@
+#
+# ~/.config/zsh/zimrc
+#
+# Not sourced at shell startup — this only configures zimfw.
+# After editing: run `zimfw install && zimfw build` (or just open a new shell,
+# .zshrc rebuilds init.zsh when this file is newer).
+#
+# Order in this file IS the source order in init.zsh. Three rules:
+#   - anything that adds completion definitions goes BEFORE `completion`
+#   - syntax-highlighting -> history-substring-search -> autosuggestions go LAST
+#   - exactly one prompt theme
+#
+
+#
+# Modules
+#
+
+# Sets sane Zsh built-in environment options.
+zmodule environment
+# Provides handy git aliases and functions.
+zmodule git
+# Applies correct bindkeys for input events.
+zmodule input
+# Sets a custom terminal title.
+zmodule termtitle
+# Utility aliases and functions. Adds colour to ls, grep and less.
+zmodule utility
+
+# <-- Normally new modules should be added here.
+
+#
+# Prompt
+#
+
+# Exposes how long the last command took to run to prompts.
+zmodule duration-info
+# Exposes git repository status information to prompts.
+zmodule git-info
+# Shortened working directory for prompts. Must load before the theme that uses it.
+zmodule prompt-pwd
+# The theme. ONE only — `asciiship` was also enabled alongside `sorin`, so both
+# themes were sourced and whichever came last silently won.
+zmodule sorin
+
+#
+# Completion
+#
+
+# Additional completion definitions for Zsh.
+zmodule zsh-users/zsh-completions --fpath src
+# Enables and configures smart and extensive tab completion, must be sourced
+# after all modules that add completion definitions.
+zmodule completion
+
+#
+# Modules that must be initialized last
+#
+
+# Fish-like syntax highlighting for Zsh, must be sourced after completion.
+zmodule zsh-users/zsh-syntax-highlighting
+# Fish-like history search for Zsh, must be sourced after
+# zsh-users/zsh-syntax-highlighting.
+zmodule zsh-users/zsh-history-substring-search
+# Fish-like autosuggestions for Zsh.
+zmodule zsh-users/zsh-autosuggestions
+
+#
+# Popular additions — uncomment what you want, then `zimfw install && zimfw build`
+#
+# fzf-driven tab completion menus. Goes after `completion`, before highlighting.
+#zmodule Aloxaf/fzf-tab
+# Reminds you when a command you typed has an alias defined.
+#zmodule MichaelAquilina/zsh-you-should-use
+# `take`, `mkcd`-style extras and better `cd` behaviour are already in `utility`.
+
